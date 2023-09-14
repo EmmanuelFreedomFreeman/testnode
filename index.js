@@ -1,3 +1,25 @@
+// __ Importing qrcode __ \\
+const QRCode = require('qrcode');
+const express = require('express')
+const app = express()
+const port = 3000
+
+app.get('/', (req, res) => {
+    
+    QRCode.toString('Encode this text in QR code', {
+        errorCorrectionLevel: 'H',
+        type: 'svg'
+    }, function(err, data) {
+        if (err) throw err;
+        res.send(data);
+    });
+})
+
+
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
+  })
+
 const twilio = require('twilio');
 const client = twilio(
  'ACe782539152467ee6b5535766e5f56531',
@@ -19,13 +41,4 @@ client.messages
  });
 
 */
- // __ Importing qrcode __ \\
-const QRCode = require('qrcode');
-
-QRCode.toString('Encode this text in QR code', {
-  errorCorrectionLevel: 'H',
-  type: 'svg'
-}, function(err, data) {
-  if (err) throw err;
-  return data;
-});
+ 
